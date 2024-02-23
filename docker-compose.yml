@@ -1,0 +1,33 @@
+version: "3.3"
+
+services:
+  wordpress:
+    image: wordpress:latest
+    build: .
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: password
+    volumes:
+      - ./my-theme:/var/www/html/wp-content/themes/my-theme
+      - ./wp-config.php:/var/www/html/wp-config.php
+      - wp_content:/var/www/html/wp-content
+    restart: always
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+volumes:
+  db_data:
+  wp_content:
