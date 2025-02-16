@@ -1,4 +1,4 @@
-# SBA BASE THEME with Docker
+# Docker WP Environment
 
 ## Commands:
 
